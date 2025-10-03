@@ -325,7 +325,7 @@
         
         /* TL;DR Section */
         .tldr-section {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #667eea 0%, #2563eb 100%);
             color: white;
             padding: 20px;
             margin: 0;
@@ -339,8 +339,7 @@
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .tldr-content {
@@ -591,7 +590,7 @@
                 <button class="modal-close" onclick="closeModal()">✕</button>
             </div>
             <div class="tldr-section">
-                <div class="tldr-label">TL;DR</div>
+                <div class="tldr-label">Quick View</div>
                 <div class="tldr-content" id="tldrContent"></div>
             </div>
             <div class="modal-body" id="modalBody"></div>
@@ -900,13 +899,16 @@
             document.getElementById('tldrContent').textContent = concept.tldr || 'No summary available';
             document.getElementById('modalBody').innerHTML = parseMarkdown(concept.explanation);
             
-            // Reset scroll position
-            const modalBody = document.getElementById('modalBody');
-            modalBody.scrollTop = 0;
-            
             // Show modal
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Force scroll to top after modal is displayed
+            setTimeout(() => {
+                document.getElementById('modal').scrollTop = 0;
+                document.getElementById('modalBody').scrollTop = 0;
+                document.querySelector('.modal-content').scrollTop = 0;
+            }, 0);
         }
         
         // Close modal
