@@ -328,7 +328,8 @@
             background: linear-gradient(135deg, #667eea 0%, #2563eb 100%);
             color: white;
             padding: 20px;
-            margin: 0;
+            margin: 0 0 20px 0;
+            border-radius: 12px;
         }
         
         .tldr-label {
@@ -589,11 +590,13 @@
                 <h2 class="modal-title" id="modalTitle"></h2>
                 <button class="modal-close" onclick="closeModal()">✕</button>
             </div>
-            <div class="tldr-section">
-                <div class="tldr-label">Quick View</div>
-                <div class="tldr-content" id="tldrContent"></div>
+            <div class="modal-body" id="modalBody">
+                <div class="tldr-section">
+                    <div class="tldr-label">Quick View</div>
+                    <div class="tldr-content" id="tldrContent"></div>
+                </div>
+                <div id="modalMainContent"></div>
             </div>
-            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
     
@@ -897,7 +900,7 @@
             
             document.getElementById('modalTitle').textContent = concept.name;
             document.getElementById('tldrContent').textContent = concept.tldr || 'No summary available';
-            document.getElementById('modalBody').innerHTML = parseMarkdown(concept.explanation);
+            document.getElementById('modalMainContent').innerHTML = parseMarkdown(concept.explanation);
             
             // Show modal
             document.getElementById('modal').classList.add('active');
@@ -907,7 +910,6 @@
             setTimeout(() => {
                 document.getElementById('modal').scrollTop = 0;
                 document.getElementById('modalBody').scrollTop = 0;
-                document.querySelector('.modal-content').scrollTop = 0;
             }, 0);
         }
         
